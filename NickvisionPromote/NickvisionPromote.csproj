@@ -1,0 +1,88 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <Version>2021.7.4</Version>
+    <Authors>Nickvision</Authors>
+    <Description>An easy to use business promotion software</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\About.png" />
+    <None Remove="Resources\Backup.png" />
+    <None Remove="Resources\Bug.png" />
+    <None Remove="Resources\Changelog.png" />
+    <None Remove="Resources\Coffee.png" />
+    <None Remove="Resources\Config.png" />
+    <None Remove="Resources\Delete.png" />
+    <None Remove="Resources\Exit.png" />
+    <None Remove="Resources\Github.png" />
+    <None Remove="Resources\icon.ico" />
+    <None Remove="Resources\icon.png" />
+    <None Remove="Resources\ImportPhone.png" />
+    <None Remove="Resources\Interface.png" />
+    <None Remove="Resources\New.png" />
+    <None Remove="Resources\Plus.png" />
+    <None Remove="Resources\Refresh.png" />
+    <None Remove="Resources\Remove.png" />
+    <None Remove="Resources\Restart.png" />
+    <None Remove="Resources\Restore.png" />
+    <None Remove="Resources\Send.png" />
+    <None Remove="Resources\Settings.png" />
+    <None Remove="Resources\Sync.png" />
+    <None Remove="Resources\UI.png" />
+    <None Remove="Resources\Updates.png" />
+    <None Remove="Resources\Welcome.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="5.0.7" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="3.1.0" />
+    <PackageReference Include="Syncfusion.Licensing" Version="19.2.0.47" />
+    <PackageReference Include="Syncfusion.PropertyGrid.WPF" Version="19.2.0.47" />
+    <PackageReference Include="Syncfusion.SfBusyIndicator.WPF" Version="19.2.0.47" />
+    <PackageReference Include="Syncfusion.SfGrid.WPF" Version="19.2.0.47" />
+    <PackageReference Include="Syncfusion.SfInput.WPF" Version="19.2.0.47" />
+    <PackageReference Include="Syncfusion.SfSkinManager.WPF" Version="19.2.0.47" />
+    <PackageReference Include="Syncfusion.SfTextInputLayout.WPF" Version="19.2.0.47" />
+    <PackageReference Include="Syncfusion.Shared.WPF" Version="19.2.0.47" />
+    <PackageReference Include="Syncfusion.Themes.FluentDark.WPF" Version="19.2.0.47" />
+    <PackageReference Include="Syncfusion.Themes.FluentLight.WPF" Version="19.2.0.47" />
+    <PackageReference Include="Syncfusion.Themes.Office2019Black.WPF" Version="19.2.0.47" />
+    <PackageReference Include="Syncfusion.Themes.Office2019White.WPF" Version="19.2.0.47" />
+    <PackageReference Include="Syncfusion.Tools.WPF" Version="19.2.0.47" />
+    <PackageReference Include="Twilio" Version="5.63.0" />
+    <PackageReference Include="Twilio.AspNet.Core" Version="5.37.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\About.png" />
+    <Resource Include="Resources\Backup.png" />
+    <Resource Include="Resources\Bug.png" />
+    <Resource Include="Resources\Changelog.png" />
+    <Resource Include="Resources\Coffee.png" />
+    <Resource Include="Resources\Config.png" />
+    <Resource Include="Resources\Delete.png" />
+    <Resource Include="Resources\Exit.png" />
+    <Resource Include="Resources\Github.png" />
+    <Resource Include="Resources\icon.ico" />
+    <Resource Include="Resources\icon.png" />
+    <Resource Include="Resources\ImportPhone.png" />
+    <Resource Include="Resources\Plus.png" />
+    <Resource Include="Resources\Remove.png" />
+    <Resource Include="Resources\Restart.png" />
+    <Resource Include="Resources\Restore.png" />
+    <Resource Include="Resources\Send.png" />
+    <Resource Include="Resources\Settings.png" />
+    <Resource Include="Resources\Sync.png" />
+    <Resource Include="Resources\UI.png" />
+    <Resource Include="Resources\Updates.png" />
+    <Resource Include="Resources\Welcome.png" />
+  </ItemGroup>
+
+</Project>

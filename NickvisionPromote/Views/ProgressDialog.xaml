@@ -1,0 +1,15 @@
+﻿<syncfusion:RibbonWindow x:Class="NickvisionPromote.Views.ProgressDialog"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+                         xmlns:local="clr-namespace:NickvisionPromote.Views"
+                         mc:Ignorable="d" Title="Please Wait" Icon="../Resources/icon.ico" Office2010Icon="../Resources/icon.png"
+                         Width="340" Height="120" ShowHelpButton="False" WindowStartupLocation="CenterScreen" WindowStyle="None"
+                         Loaded="Dialog_Loaded">
+    <Grid>
+        <syncfusion:SfBusyIndicator Name="BusyIndicator" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-20,0,0"
+                                    AnimationType="Box" FontSize="18" IsBusy="True"/>
+    </Grid>
+</syncfusion:RibbonWindow>

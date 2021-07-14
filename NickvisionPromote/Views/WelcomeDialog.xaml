@@ -1,0 +1,65 @@
+﻿<syncfusion:RibbonWindow x:Class="NickvisionPromote.Views.WelcomeDialog"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+                         xmlns:local="clr-namespace:NickvisionPromote.Views"
+                         mc:Ignorable="d" Title="First Time Setup" Icon="../Resources/icon.ico" Office2010Icon="../Resources/icon.png"
+                         Width="800" Height="450" ShowHelpButton="False" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+                         Loaded="Dialog_Loaded">
+    <syncfusion:WizardControl HelpVisible="False" Cancel="Cancel" Finish="Finish">
+        <syncfusion:WizardPage BannerImage="../Resources/Welcome.png" Title="Welcome to Nickvision Promote" Description="Please follow the steps to configure your experience.">
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" Text="The following wizard will help you to setup your experience with Nickvision Promote. If you cancel the wizard at any time, the default settings will be applied."/>
+            </StackPanel>
+        </syncfusion:WizardPage>
+
+        <syncfusion:WizardPage BannerImage="../Resources/UI.png" Title="Customize the User Interface" Description="Configure your user interface settings below.">
+            <StackPanel>
+                <GroupBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Header="Theme">
+                    <StackPanel>
+                        <RadioButton Name="BtnLight" Margin="0,4,0,0" Content="Light"/>
+                        <RadioButton Name="BtnDark" Margin="0,10,0,0" Content="Dark"/>
+                        <RadioButton Name="BtnFluentLight" Margin="0,10,0,0" Content="Fluent Light"/>
+                        <RadioButton Name="BtnFluentDark" Margin="0,10,0,0" Content="Fluent Dark"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <CheckBox Name="ChkRibbonCollapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0" Content="Is Ribbon Collapsed"/>
+            </StackPanel>
+        </syncfusion:WizardPage>
+
+        <syncfusion:WizardPage BannerImage="../Resources/Config.png" Title="Application Specific Settings" Description="Configure your application specific settings below.">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <syncfusion:SfTextInputLayout HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0" Width="300" Hint="Twilio Account SID">
+                        <syncfusion:SfTextBoxExt Name="TxtTwilioAccountSID"/>
+                    </syncfusion:SfTextInputLayout>
+
+                    <syncfusion:SfTextInputLayout HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0" Width="300" Hint="Twilio Auth Token">
+                        <syncfusion:SfTextBoxExt Name="TxtTwilioAuthToken"/>
+                    </syncfusion:SfTextInputLayout>
+
+                    <syncfusion:SfTextInputLayout HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0" Width="300" Hint="Twilio From Number">
+                        <syncfusion:SfTextBoxExt Name="TxtTwilioFromNumber"/>
+                    </syncfusion:SfTextInputLayout>
+
+                    <syncfusion:SfTextInputLayout HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,6,6,0" Hint="Start Message">
+                        <syncfusion:SfTextBoxExt Name="TxtStartMessage"/>
+                    </syncfusion:SfTextInputLayout>
+
+                    <syncfusion:SfTextInputLayout HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,6,6,0" Hint="Stop Message">
+                        <syncfusion:SfTextBoxExt Name="TxtStopMessage"/>
+                    </syncfusion:SfTextInputLayout>
+                </StackPanel>
+            </ScrollViewer>
+        </syncfusion:WizardPage>
+
+        <syncfusion:WizardPage BannerImage="../Resources/Restart.png" Title="Application Restart Required" Description="Last step to enjoying your NickvisionPromote experience!">
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" Text="Once you click finish, the application will be automatically restarted to apply the current settings."/>
+            </StackPanel>
+        </syncfusion:WizardPage>
+    </syncfusion:WizardControl>
+</syncfusion:RibbonWindow>

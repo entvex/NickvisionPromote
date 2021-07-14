@@ -1,0 +1,106 @@
+﻿<syncfusion:RibbonWindow x:Class="NickvisionPromote.Views.MainWindow"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+                         xmlns:local="clr-namespace:NickvisionPromote.Views"
+                         mc:Ignorable="d" Title="Nickvision Promote" Icon="../Resources/icon.ico" Office2010Icon="../Resources/icon.png"
+                         Width="800" Height="600" ShowHelpButton="False" WindowState="Maximized" WindowStartupLocation="CenterScreen"
+                         Loaded="Window_Loaded" Closing="Window_Closing">
+    <syncfusion:RibbonWindow.StatusBar>
+        <syncfusion:RibbonStatusBar>
+            <Grid>
+                <TextBlock Name="LblStatusLeft" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6,4,0,0" Foreground="White" Text="Number of Phone Numbers:"/>
+                <TextBlock Name="LblStatusRight" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,4,6,0" Foreground="White" Text="Incoming Messages Server:"/>
+            </Grid>
+        </syncfusion:RibbonStatusBar>
+    </syncfusion:RibbonWindow.StatusBar>
+
+    <Grid>
+        <DockPanel Name="DockPanel">
+            <syncfusion:Ribbon Name="Ribbon" DockPanel.Dock="Top" RibbonStateChanged="RibbonStateChanged">
+                <syncfusion:Ribbon.QuickAccessToolBar>
+                    <syncfusion:QuickAccessToolBar>
+                        <syncfusion:RibbonButton SmallIcon="../Resources/ImportPhone.png" Label="Import Phone Numbers" ToolTip="Import Phone Numbers (Ctrl+O)" Click="ImportPhoneNumbers"/>
+                        <syncfusion:RibbonButton SmallIcon="../Resources/Send.png" Label="Send Message" ToolTip="Send Message (Ctrl+Shift+S)" Click="SendMessage"/>
+                        <syncfusion:RibbonSeparator/>
+                        <syncfusion:RibbonButton SmallIcon="../Resources/Updates.png" Label="Check for Updates" ToolTip="Check for Updates" Click="CheckForUpdates"/>
+                    </syncfusion:QuickAccessToolBar>
+                </syncfusion:Ribbon.QuickAccessToolBar>
+
+                <syncfusion:Ribbon.ApplicationMenu>
+                    <syncfusion:ApplicationMenu>
+                        <syncfusion:RibbonButton SizeForm="Small" Width="200" Height="30" SmallIcon="../Resources/ImportPhone.png" Label="Import Phone Numbers" ToolTip="Ctrl+O" Click="ImportPhoneNumbers"/>
+                        <syncfusion:BackStageSeparator/>
+                        <syncfusion:RibbonButton SizeForm="Small" Width="200" Height="30" SmallIcon="../Resources/Exit.png" Label="Exit" ToolTip="Alt+F4" Click="Exit"/>
+
+                        <syncfusion:ApplicationMenu.MenuItems>
+                            <TextBlock MinWidth="200" MinHeight="300" Text="Nickvision Promote"/>
+                        </syncfusion:ApplicationMenu.MenuItems>
+
+                        <syncfusion:ApplicationMenu.ApplicationItems>
+                            <syncfusion:ButtonAdv Background="Transparent" SizeMode="Normal" SmallIcon="../Resources/Settings.png" Label="Settings" Click="Settings"/>
+                        </syncfusion:ApplicationMenu.ApplicationItems>
+                    </syncfusion:ApplicationMenu>
+                </syncfusion:Ribbon.ApplicationMenu>
+
+                <syncfusion:RibbonTab Caption="Home" IsChecked="True">
+                    <syncfusion:RibbonBar Header="Promote">
+                        <syncfusion:RibbonButton SizeForm="Large" LargeIcon="../Resources/Send.png" Label="Send Message" ToolTip="Ctrl+Shift+S" Click="SendMessage"/>
+                    </syncfusion:RibbonBar>
+
+                    <syncfusion:RibbonBar Header="Phone Database">
+                        <syncfusion:RibbonButton SizeForm="Large" LargeIcon="../Resources/Remove.png" Label="Remove All Numbers" ToolTip="Ctrl+Shift+Delete" Click="RemoveAllNumbers"/>
+                        <syncfusion:RibbonButton SizeForm="Large" LargeIcon="../Resources/Sync.png" Label="Sync Opt Ins and Outs" ToolTip="F5" Click="SyncOptInsAndOuts"/>
+                        <syncfusion:RibbonButton SizeForm="Large" LargeIcon="../Resources/Backup.png" Label="Backup Database" ToolTip="Ctrl+Shift+B" Click="BackupDatabase"/>
+                        <syncfusion:RibbonButton SizeForm="Large" LargeIcon="../Resources/Restore.png" Label="Restore Database" ToolTip="Ctrl+Shift+R" Click="RestoreDatabase"/>
+                    </syncfusion:RibbonBar>
+                </syncfusion:RibbonTab>
+
+                <syncfusion:RibbonTab Caption="Help">
+                    <syncfusion:RibbonBar Header="Actions">
+                        <syncfusion:RibbonButton SizeForm="Large" LargeIcon="../Resources/Updates.png" Label="Check for Updates" Click="CheckForUpdates"/>
+                        <syncfusion:RibbonButton SizeForm="Large" LargeIcon="../Resources/Bug.png" Label="Report a Bug" Click="ReportABug"/>
+                    </syncfusion:RibbonBar>
+
+                    <syncfusion:RibbonBar Header="About">
+                        <syncfusion:RibbonButton SizeForm="Large" LargeIcon="../Resources/Changelog.png" Label="Changelog" Click="Changelog"/>
+                        <syncfusion:RibbonButton SizeForm="Large" LargeIcon="../Resources/About.png" Label="About" ToolTip="F1" Click="About"/>
+                        <syncfusion:RibbonButton SmallIcon="../Resources/Github.png" Label="GitHub Repo" Click="GitHubRepo"/>
+                        <syncfusion:RibbonButton SmallIcon="../Resources/Coffee.png" Label="Buy Me a Coffee" Click="BuyMeACoffee"/>
+                    </syncfusion:RibbonBar>
+                </syncfusion:RibbonTab>
+            </syncfusion:Ribbon>
+            
+            <Grid DockPanel.Dock="Top">
+                <syncfusion:SfTextInputLayout Name="TextInputLayout1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="320" Hint="Search Phone Number">
+                    <syncfusion:SfTextBoxExt Name="TxtSearchPhoneNumber" TextChanged="TxtSearchPhoneNumber_TextChanged"/>
+                </syncfusion:SfTextInputLayout>
+
+                <ListBox Name="ListPhoneNumbers" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="10,60,0,60" Width="320" BorderBrush="{Binding Path=BorderBrush, ElementName=TextInputLayout1}" BorderThickness="1"/>
+
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10" Width="320">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <syncfusion:ButtonAdv Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,4,0"
+                                          SizeMode="Large" Label="Add" LargeIcon="../Resources/Plus.png" Click="AddPhoneNumber"/>
+
+                    <syncfusion:ButtonAdv Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4,0,0,0"
+                                          SizeMode="Large" Label="Remove" LargeIcon="../Resources/Delete.png" Click="RemovePhoneNumber"/>
+                </Grid>
+
+                <syncfusion:SfTextInputLayout HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="340,10,10,0" Hint="Picture URL">
+                    <syncfusion:SfTextBoxExt Name="TxtPictureURL"/>
+                </syncfusion:SfTextInputLayout>
+
+                <syncfusion:SfTextInputLayout Name="TxtInputMessage" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="340,70,10,0" Hint="Message (0/1600)">
+                    <syncfusion:SfTextBoxExt Name="TxtMessage" Height="240" AcceptsReturn="True" TextWrapping="Wrap" MaxLength="1600" ScrollViewer.VerticalScrollBarVisibility="Auto" TextChanged="TxtMessage_TextChanged"/>
+                </syncfusion:SfTextInputLayout>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</syncfusion:RibbonWindow>
