@@ -4,12 +4,14 @@ using NgrokSharp;
 using NgrokSharp.DTO;
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
+using JsonSerializer = System.Text.Json.JsonSerializer;
+
 
 namespace NickvisionPromote.Models
 {
@@ -79,15 +81,19 @@ namespace NickvisionPromote.Models
                 proto = "http",
                 addr = "5001"
             };
-            var result = await _ngrokManager.StartTunnelAsync(tunnel);
-            if ((int)result.StatusCode == 201)
+            var httpResponseMessage = await _ngrokManager.StartTunnelAsync(tunnel);
+
+            if ((int)httpResponseMessage.StatusCode == 201)
             {
-                var tunnelDetail = JsonSerializer.Deserialize<TunnelDetailDTO>(await result.Content.ReadAsStringAsync());
-                return tunnelDetail.PublicUrl.ToString() + "/sms";
+                var tunnelDetail =
+                    JsonConvert.DeserializeObject<TunnelDetailDTO>(
+                        await httpResponseMessage.Content.ReadAsStringAsync());
+
+                return $"{tunnelDetail.PublicUrl}/sms";
             }
             else
             {
-                var tunnelError = JsonSerializer.Deserialize<TunnelErrorDTO>(await result.Content.ReadAsStringAsync());
+                var tunnelError = JsonSerializer.Deserialize<TunnelErrorDTO>(await httpResponseMessage.Content.ReadAsStringAsync());
                 throw new ApplicationException(tunnelError.Msg);
             }
         }
