@@ -31,7 +31,10 @@
     <None Remove="Resources\Restart.png" />
     <None Remove="Resources\Restore.png" />
     <None Remove="Resources\Send.png" />
+    <None Remove="Resources\Server.png" />
     <None Remove="Resources\Settings.png" />
+    <None Remove="Resources\STart.png" />
+    <None Remove="Resources\Stop.png" />
     <None Remove="Resources\Sync.png" />
     <None Remove="Resources\UI.png" />
     <None Remove="Resources\Updates.png" />
@@ -41,7 +44,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="5.0.7" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="5.0.8" />
+    <PackageReference Include="NgrokSharpDev" Version="1.0.8" />
     <PackageReference Include="Ookii.Dialogs.Wpf" Version="3.1.0" />
     <PackageReference Include="Syncfusion.Licensing" Version="19.2.0.47" />
     <PackageReference Include="Syncfusion.PropertyGrid.WPF" Version="19.2.0.47" />
@@ -56,7 +60,7 @@
     <PackageReference Include="Syncfusion.Themes.Office2019Black.WPF" Version="19.2.0.47" />
     <PackageReference Include="Syncfusion.Themes.Office2019White.WPF" Version="19.2.0.47" />
     <PackageReference Include="Syncfusion.Tools.WPF" Version="19.2.0.47" />
-    <PackageReference Include="Twilio" Version="5.63.0" />
+    <PackageReference Include="Twilio" Version="5.64.0" />
     <PackageReference Include="Twilio.AspNet.Core" Version="5.37.2" />
   </ItemGroup>
 
@@ -73,12 +77,15 @@
     <Resource Include="Resources\icon.ico" />
     <Resource Include="Resources\icon.png" />
     <Resource Include="Resources\ImportPhone.png" />
+    <Resource Include="Resources\Start.png" />
     <Resource Include="Resources\Plus.png" />
     <Resource Include="Resources\Remove.png" />
     <Resource Include="Resources\Restart.png" />
     <Resource Include="Resources\Restore.png" />
     <Resource Include="Resources\Send.png" />
+    <Resource Include="Resources\Server.png" />
     <Resource Include="Resources\Settings.png" />
+    <Resource Include="Resources\Stop.png" />
     <Resource Include="Resources\Sync.png" />
     <Resource Include="Resources\UI.png" />
     <Resource Include="Resources\Updates.png" />

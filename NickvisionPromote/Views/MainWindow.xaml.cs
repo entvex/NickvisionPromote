@@ -65,10 +65,14 @@ namespace NickvisionPromote.Views
             LblStatusLeft.Text = $"Number of Phone Numbers: {ListPhoneNumbers.Items.Count - 1}";
             _twilio.AccountSID = configuration.TwilioAccountSID;
             _twilio.AuthToken = configuration.TwilioAuthToken;
-            LblStatusRight.Text = "Incoming Messages Server: http://localhost:5001/sms";
+            StartServer(sender, e);
         }
 
-        private void Window_Closing(object sender, CancelEventArgs e) => _twilio.Dispose();
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            _twilio.StopIncommingServer();
+            _twilio.Dispose();
+        }
 
         private async void ImportPhoneNumbers(object sender, RoutedEventArgs e)
         {
@@ -217,9 +221,58 @@ namespace NickvisionPromote.Views
             }
         }
 
+        private async void StartServer(object sender, RoutedEventArgs e)
+        {
+            BtnStartServer.IsEnabled = false;
+            BtnStopServer.IsEnabled = true;
+            BtnPortForward.IsEnabled = true;
+            LblStatusRight.Text = "Incoming Messages Server: http://localhost:5001/sms";
+            await _twilio.RunIncommingServerAsync();
+        }
+
+        private void StopServer(object sender, RoutedEventArgs e)
+        {
+            _twilio.StopIncommingServer();
+            BtnStartServer.IsEnabled = true;
+            BtnStopServer.IsEnabled = false;
+            BtnPortForward.IsEnabled = false;
+            LblStatusRight.Text = "Incoming Messages Server: STOPPED";
+        }
+
+        private async void PortForwardWithNgrok(object sender, RoutedEventArgs e)
+        {
+            var configuration = await Configuration.LoadAsync();
+            if(string.IsNullOrEmpty(configuration.NgrokAPIKey))
+            {
+                this.ShowOKDialog("Error", "Invalid Ngrok API Key", "Ngrok API Key can't be empty. Go to settings to configure your ngrok information.", null, TaskDialogIcon.Error);
+            }
+            else
+            {
+                var ngrokURL = "";
+                new ProgressDialog("Forwarding port via ngrok...", async () =>
+                {
+                    try
+                    {
+                        ngrokURL = await _twilio.StartPortForwardWithNgrokAsync(configuration.NgrokAPIKey);
+                    }
+                    catch(Exception e)
+                    {
+                        this.ShowOKDialog("Error", e.Message, e.StackTrace, null, TaskDialogIcon.Error);
+                        ngrokURL = "";
+                    }
+                }).ShowDialog();
+                if(!string.IsNullOrEmpty(ngrokURL))
+                {
+                    this.ShowOKDialog("Port Forward with Ngrok", "Successfully Opened Tunnel", $"Here is your public ngrok url: {ngrokURL}\nThis url is also displayed at the bottom right of your screen for future reference.\nWhen you restart the server and/or the application, you will need to re-run the port forward command to generate a new public url.", null, TaskDialogIcon.Information);
+                    BtnPortForward.IsEnabled = false;
+                    LblStatusRight.Text = $"Incoming Messages Server: {ngrokURL}";
+                }
+            }
+        }
+
         private void CheckForUpdates(object sender, RoutedEventArgs e)
         {
-            var updater = new Updater("https://raw.githubusercontent.com/NickvisionTech/NickvisionPromote/main/NickvisionPromote/updateConfig.json", new Version("2021.7.4"));
+            var updater = new Updater("https://raw.githubusercontent.com/NickvisionTech/NickvisionPromote/main/NickvisionPromote/updateConfig.json", new Version("2021.7.5"));
             new ProgressDialog("Checking for updates...", async () => await updater.CheckForUpdatesAsync()).ShowDialog();
             if (updater.UpdateAvailable)
             {
@@ -237,9 +290,9 @@ namespace NickvisionPromote.Views
 
         private void ReportABug(object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo() { FileName = "https://github.com/NickvisionTech/NickvisionPromote/issues/new", UseShellExecute = true });
 
-        private void Changelog(object sender, RoutedEventArgs e) => this.ShowOKDialog("Changelog", "What's New?", "- Added support for a progress dialog");
+        private void Changelog(object sender, RoutedEventArgs e) => this.ShowOKDialog("Changelog", "What's New?", "- Added functions for starting and stoping the incoming messages server\n- Added support for port forwarding the incoming messages server via ngrok\n- Updated dependencies");
 
-        private void About(object sender, RoutedEventArgs e) => this.ShowOKDialog("About", "About Nickvision Promote", "Version: 2021.7.4\n\nAn easy to use business promotion software", "Built with NickvisionApps Generation 6\nC#, WPF, Syncfusion (R), Icons8 (C)\n\nDeveloper: Nicholas Logozzo\nNickvision (C) 2021");
+        private void About(object sender, RoutedEventArgs e) => this.ShowOKDialog("About", "About Nickvision Promote", "Version: 2021.7.5\n\nAn easy to use business promotion software", "Built with NickvisionApps Generation 6\nC#, WPF, Syncfusion (R), Icons8 (C)\n\nDeveloper: Nicholas Logozzo\nNickvision (C) 2021");
 
         private void GitHubRepo(object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo() { FileName = "https://github.com/NickvisionTech/NickvisionPromote", UseShellExecute = true });
 

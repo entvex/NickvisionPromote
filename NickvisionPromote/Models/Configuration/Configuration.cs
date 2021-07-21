@@ -43,6 +43,10 @@ namespace NickvisionPromote.Models.Configuration
         [Description("The message when someone texts STOP to the twilio from number")]
         public string StopMessage { get; set; }
 
+        [DisplayName("Ngrok API Key")]
+        [Description("Your api key for ngrok. Required if Port Forwarding with Ngrok")]
+        public string NgrokAPIKey { get; set; }
+
         public Configuration()
         {
             IsFirstTimeOpen = true;
@@ -53,6 +57,7 @@ namespace NickvisionPromote.Models.Configuration
             TwilioFromNumber = "";
             StartMessage = "You have subscribed to receiving messages. You can text STOP at any time to opt out.";
             StopMessage = "You have unsubscribed to receiving messages. You can text START at any time to opt in again.";
+            NgrokAPIKey = "";
         }
 
         public static async Task<Configuration> LoadAsync()

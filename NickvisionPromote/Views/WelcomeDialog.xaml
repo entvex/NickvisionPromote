@@ -52,11 +52,15 @@
                     <syncfusion:SfTextInputLayout HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,6,6,0" Hint="Stop Message">
                         <syncfusion:SfTextBoxExt Name="TxtStopMessage"/>
                     </syncfusion:SfTextInputLayout>
+
+                    <syncfusion:SfTextInputLayout HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,6,6,0" Hint="Ngrok API Key (Required if Port Forwarding with Ngrok)">
+                        <syncfusion:SfTextBoxExt Name="TxtNgrokAPIKey"/>
+                    </syncfusion:SfTextInputLayout>
                 </StackPanel>
             </ScrollViewer>
         </syncfusion:WizardPage>
 
-        <syncfusion:WizardPage BannerImage="../Resources/Restart.png" Title="Application Restart Required" Description="Last step to enjoying your NickvisionPromote experience!">
+        <syncfusion:WizardPage BannerImage="../Resources/Restart.png" Title="Application Restart Required" Description="Last step to enjoying your Nickvision Promote experience!">
             <StackPanel>
                 <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" Text="Once you click finish, the application will be automatically restarted to apply the current settings."/>
             </StackPanel>

@@ -24,6 +24,7 @@
                     <syncfusion:QuickAccessToolBar>
                         <syncfusion:RibbonButton SmallIcon="../Resources/ImportPhone.png" Label="Import Phone Numbers" ToolTip="Import Phone Numbers (Ctrl+O)" Click="ImportPhoneNumbers"/>
                         <syncfusion:RibbonButton SmallIcon="../Resources/Send.png" Label="Send Message" ToolTip="Send Message (Ctrl+Shift+S)" Click="SendMessage"/>
+                        <syncfusion:RibbonButton SmallIcon="../Resources/Sync.png" Label="Sync Opt Ins and Outs" ToolTip="Sync Opt Ins and Outs (F5)" Click="SyncOptInsAndOuts"/>
                         <syncfusion:RibbonSeparator/>
                         <syncfusion:RibbonButton SmallIcon="../Resources/Updates.png" Label="Check for Updates" ToolTip="Check for Updates" Click="CheckForUpdates"/>
                     </syncfusion:QuickAccessToolBar>
@@ -58,6 +59,14 @@
                     </syncfusion:RibbonBar>
                 </syncfusion:RibbonTab>
 
+                <syncfusion:RibbonTab Caption="Incoming Server">
+                    <syncfusion:RibbonBar Header="Server Management">
+                        <syncfusion:RibbonButton Name="BtnStartServer" SizeForm="Large" LargeIcon="../Resources/Start.png" Label="Start Server" Click="StartServer"/>
+                        <syncfusion:RibbonButton Name="BtnStopServer" SizeForm="Large" LargeIcon="../Resources/Stop.png" Label="Stop Server" IsEnabled="False" Click="StopServer"/>
+                        <syncfusion:RibbonButton Name="BtnPortForward" SizeForm="Large" LargeIcon="../Resources/Server.png" Label="Port Forward with Ngrok" IsEnabled="False" Click="PortForwardWithNgrok"/>
+                    </syncfusion:RibbonBar>
+                </syncfusion:RibbonTab>
+
                 <syncfusion:RibbonTab Caption="Help">
                     <syncfusion:RibbonBar Header="Actions">
                         <syncfusion:RibbonButton SizeForm="Large" LargeIcon="../Resources/Updates.png" Label="Check for Updates" Click="CheckForUpdates"/>
@@ -86,10 +95,10 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <syncfusion:ButtonAdv Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,4,0"
+                    <syncfusion:ButtonAdv Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,4,4,0"
                                           SizeMode="Large" Label="Add" LargeIcon="../Resources/Plus.png" Click="AddPhoneNumber"/>
 
-                    <syncfusion:ButtonAdv Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4,0,0,0"
+                    <syncfusion:ButtonAdv Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4,4,0,0"
                                           SizeMode="Large" Label="Remove" LargeIcon="../Resources/Delete.png" Click="RemovePhoneNumber"/>
                 </Grid>
 

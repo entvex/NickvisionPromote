@@ -1,1 +1,1 @@
-{"LatestVersion":"2021.7.4","LinkToInstaller":"https://github.com/NickvisionTech/NickvisionPromote/releases/download/2021.7.4/NickvisionPromoteSetup.exe","Changelog":"- Added support for a progress dialog"}
+{"LatestVersion":"2021.7.5","LinkToInstaller":"https://github.com/NickvisionTech/NickvisionPromote/releases/download/2021.7.5/NickvisionPromoteSetup.exe","Changelog":"- Added functions for starting and stoping the incoming messages server\n- Added support for port forwarding the incoming messages server via ngrok\n- Updated dependencies"}

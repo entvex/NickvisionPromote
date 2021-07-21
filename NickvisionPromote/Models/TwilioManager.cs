@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using NgrokSharp;
+using NgrokSharp.DTO;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
@@ -11,7 +15,9 @@ namespace NickvisionPromote.Models
 {
     public class TwilioManager : IDisposable
     {
-        private IWebHost _webHost;
+        private CancellationTokenSource _incommingServerCancellationToken;
+        private INgrokManager _ngrokManager;
+        private bool _downloadedNgrokThisSession;
 
         public string AccountSID { get; set; }
         public string AuthToken { get; set; }
@@ -20,8 +26,21 @@ namespace NickvisionPromote.Models
         {
             AccountSID = accountSID;
             AuthToken = authToken;
-            _webHost = WebHost.CreateDefaultBuilder().UseKestrel().UseStartup<WebStartup>().UseUrls("http://localhost:5001").Build();
-            _webHost.Start();
+            _incommingServerCancellationToken = new CancellationTokenSource();
+            _ngrokManager = new NgrokManager();
+            _downloadedNgrokThisSession = false;
+        }
+
+        public async Task RunIncommingServerAsync()
+        {
+            using var webHost = WebHost.CreateDefaultBuilder().UseKestrel().UseStartup<WebStartup>().UseUrls("http://localhost:5001").Build();
+            await webHost.RunAsync(_incommingServerCancellationToken.Token);
+        }
+
+        public void StopIncommingServer()
+        {
+            _incommingServerCancellationToken.Cancel();
+            _ngrokManager.StopNgrok();
         }
 
         public async Task<int> SendMessageAsync(PhoneNumberDatabase phoneDatabase, string fromNumber, string message, string mediaURL)
@@ -45,6 +64,34 @@ namespace NickvisionPromote.Models
             return successCount;
         }
 
-        public void Dispose() => _webHost.Dispose();
+        public async Task<string> StartPortForwardWithNgrokAsync(string apiKey)
+        {
+            if(!_downloadedNgrokThisSession)
+            {
+                await _ngrokManager.DownloadAndUnzipNgrokAsync();
+                _downloadedNgrokThisSession = true;
+            }
+            await _ngrokManager.RegisterAuthTokenAsync(apiKey);
+            _ngrokManager.StartNgrok();
+            var tunnel = new StartTunnelDTO
+            {
+                name = "Incomming Messages Server",
+                proto = "http",
+                addr = "5001"
+            };
+            var result = await _ngrokManager.StartTunnelAsync(tunnel);
+            if ((int)result.StatusCode == 201)
+            {
+                var tunnelDetail = JsonSerializer.Deserialize<TunnelDetailDTO>(await result.Content.ReadAsStringAsync());
+                return tunnelDetail.PublicUrl.ToString() + "/sms";
+            }
+            else
+            {
+                var tunnelError = JsonSerializer.Deserialize<TunnelErrorDTO>(await result.Content.ReadAsStringAsync());
+                throw new ApplicationException(tunnelError.Msg);
+            }
+        }
+
+        public void Dispose() => _incommingServerCancellationToken.Dispose();
     }
 }

@@ -9,7 +9,7 @@
                          Width="340" Height="120" ShowHelpButton="False" WindowStartupLocation="CenterScreen" WindowStyle="None"
                          Loaded="Dialog_Loaded">
     <Grid>
-        <syncfusion:SfBusyIndicator Name="BusyIndicator" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-20,0,0"
+        <syncfusion:SfBusyIndicator Name="BusyIndicator" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,4,0,0"
                                     AnimationType="Box" FontSize="18" IsBusy="True"/>
     </Grid>
 </syncfusion:RibbonWindow>

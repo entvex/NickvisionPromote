@@ -26,6 +26,7 @@ namespace NickvisionPromote.Views
             TxtTwilioFromNumber.Text = configuration.TwilioFromNumber;
             TxtStartMessage.Text = configuration.StartMessage;
             TxtStopMessage.Text = configuration.StopMessage;
+            TxtNgrokAPIKey.Text = configuration.NgrokAPIKey;
         }
 
         private void Cancel(object sender, RoutedEventArgs e) => Close();
@@ -55,6 +56,7 @@ namespace NickvisionPromote.Views
             configuration.TwilioFromNumber = TxtTwilioFromNumber.Text;
             configuration.StartMessage = TxtStartMessage.Text;
             configuration.StopMessage = TxtStopMessage.Text;
+            configuration.NgrokAPIKey = TxtNgrokAPIKey.Text;
             await configuration.SaveAsync();
             System.Windows.Forms.Application.Restart();
             Application.Current.Shutdown();
